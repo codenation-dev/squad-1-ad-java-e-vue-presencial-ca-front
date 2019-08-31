@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/central-erros.iml" filepath="$PROJECT_DIR$/.idea/central-erros.iml" />
+      <module fileurl="file://$PROJECT_DIR$/br/com/codenation/central/backend/app/spring-http.iml" filepath="$PROJECT_DIR$/br/com/codenation/central/backend/app/spring-http.iml" />
     </modules>
   </component>
 </project>
