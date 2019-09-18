@@ -1,0 +1,12 @@
+jobs:
+  build:
+    filters:
+      branchs:
+        only: master
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - run:
+          name: install-dependencies
+          command: npm install
