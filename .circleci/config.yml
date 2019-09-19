@@ -17,9 +17,6 @@ jobs:
           name: lint
           command: npm run lint -- --mode production
       - run:
-          name: unit-tests
-          command: npm run test:unit
-      - run:
           name: build
           command: npm run build
       - run:
