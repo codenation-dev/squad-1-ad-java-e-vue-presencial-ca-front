@@ -5,7 +5,7 @@ jobs:
       branches:
         only:
           - master
-          - develp
+          - develop
     docker:
       - image: circleci/node:10.16.3
     steps:
