@@ -1,8 +1,11 @@
+version: 2
 jobs:
   build:
     filters:
-      branchs:
-        only: master
+      branches:
+        only:
+          - master
+          - develp
     docker:
       - image: circleci/node:10.16.3
     steps:
