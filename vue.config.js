@@ -1,11 +1,7 @@
+const path = require("path");
+
 module.exports = {
-  css: {
-    loaderOptions: {
-      sass: {
-        data: `
-          @import "@/assets/css/style.scss";
-        `
-      }
-    }
+  chainWebpack: config => {
+    config.resolve.alias.set("env", path.resolve(__dirname, ".env.js"));
   }
 };
