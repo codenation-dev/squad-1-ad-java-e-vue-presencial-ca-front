@@ -1,1 +1,1 @@
-export const domain = 'https://develop-squad-one.herokuapp.com/user';
+export const domain = "https://develop-squad-one.herokuapp.com/user";

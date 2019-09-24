@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { domain } from 'env';
+import axios from "axios";
+import { domain } from "env";
 
 async function get(path, config) {
   try {
