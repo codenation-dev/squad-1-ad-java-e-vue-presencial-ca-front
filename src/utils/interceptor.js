@@ -1,7 +1,6 @@
 import router from "@/router";
 
 export default config => {
-  console.log(`interceptor`);
   if (location.pathname != "/login") {
     try {
       const auth = localStorage.getItem("state");
