@@ -1,6 +1,5 @@
 <template>
   <form @submit.prevent="submit(form)">
-    <!-- <section class="level"> -->
     <div class="filter-section">
       <div class="container level">
         <div class="level-left">
@@ -90,12 +89,6 @@ export default {
   @media (max-width: 480px) {
     display: flex;
     flex-direction: column;
-  }
-
-  @media (max-width: 768px) {
-    div {
-      width: 50%;
-    }
   }
 }
 
