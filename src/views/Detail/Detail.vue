@@ -37,8 +37,8 @@ export default {
   components: {
     Button
   },
-  props() {
-    String;
+  props: {
+    slug: String
   },
   computed: {
     isLevel() {
@@ -75,7 +75,7 @@ export default {
 
 .button {
   margin-top: 2vh;
-  margin-left: 4vh;
+  margin-left: 4vw;
 }
 
 .title {
