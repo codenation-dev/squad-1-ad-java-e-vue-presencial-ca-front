@@ -2,13 +2,23 @@ import Vue from "vue";
 import Buefy from "buefy";
 import axios from "axios";
 
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
 import router from "./router";
 import App from "./App.vue";
 import interceptor from "@/utils/interceptor";
 
 axios.interceptors.request.use(interceptor);
 
-Vue.use(Buefy);
+library.add(faSearch);
+Vue.component("vue-fontawesome", FontAwesomeIcon);
+
+Vue.use(Buefy, {
+  defaultIconComponent: "vue-fontawesome",
+  defaultIconPack: "fas"
+});
 
 Vue.config.productionTip = false;
 
