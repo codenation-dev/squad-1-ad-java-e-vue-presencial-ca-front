@@ -2,12 +2,7 @@
   <div>
     <div class="card">
       <section>
-        <Button
-          class="back"
-          label="Voltar"
-          isOutlined
-          isPrimary
-        />
+        <Button class="back" label="Voltar" isOutlined isPrimary />
       </section>
       <section class="card-header-title">
         <div class="description">
