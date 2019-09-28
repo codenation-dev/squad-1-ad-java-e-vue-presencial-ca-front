@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="card">
       <section>
         <Button class="back" label="Voltar" isOutlined isPrimary />
@@ -20,9 +20,9 @@
           <p class="tag is-medium is-danger has-text-centered">
             {{ level }}
           </p>
-          <h2 class="title is-4 content">Eventos</h2>
+          <h2 class="title is-4 content is-marginless">Eventos</h2>
           <p class="content">{{ occurrences }}</p>
-          <h2 class="title is-4">Coletado por</h2>
+          <h2 class="title is-4 is-marginless">Coletado por</h2>
           <p class="content">{{ token }}</p>
         </div>
       </section>
@@ -86,6 +86,10 @@ export default {
 .description {
   padding-bottom: 2px;
   margin-bottom: 0;
+}
+
+.tag {
+  margin-bottom: 10px;
 }
 
 .back {
