@@ -17,7 +17,7 @@
           <p class="content">{{ details }}</p>
         </div>
         <div class="column is-2 level right">
-          <p class="tag is-medium is-danger has-text-centered">
+          <p :class="isLevel" class="tag is-medium has-text-centered">
             {{ level }}
           </p>
           <h2 class="title is-4 content is-marginless">Eventos</h2>
@@ -39,6 +39,20 @@ export default {
   },
   props() {
     String;
+  },
+  computed: {
+    isLevel() {
+      switch (this.level) {
+        case "error":
+          return "is-danger";
+        case "warning":
+          return "is-warning";
+        case "info":
+          return "is-info";
+        default:
+          return "";
+      }
+    }
   },
   data() {
     return {
