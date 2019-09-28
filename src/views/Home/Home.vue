@@ -1,11 +1,20 @@
 <template>
   <div>
-    <h1>This is an home page</h1>
+    <FilterLog />
+    <div class="container">
+      <h1>This is an home page</h1>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+import FilterLog from "@/components/FilterLog";
+
+export default {
+  components: {
+    FilterLog
+  }
+};
 </script>
 
 <style></style>

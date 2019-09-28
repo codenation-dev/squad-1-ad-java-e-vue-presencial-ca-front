@@ -8,4 +8,9 @@ export default {};
 
 <style lang="scss">
 @import "./theme.scss";
+
+html,
+body {
+  background-color: $background;
+}
 </style>
