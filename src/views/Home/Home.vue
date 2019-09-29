@@ -2,7 +2,14 @@
   <div>
     <FilterLog />
     <div class="container">
-      <h1>This is an home page</h1>
+      <RouterLink
+        :to="{
+          name: 'detail',
+          props: { slug: 'data' },
+          params: { slug: 'data' }
+        }"
+        >Detail Example</RouterLink
+      >
     </div>
   </div>
 </template>
