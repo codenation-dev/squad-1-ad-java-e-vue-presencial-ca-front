@@ -20,7 +20,7 @@
         </div>
         <div class="column is-2 level right">
           <p :class="isLevel" class="tag is-medium has-text-centered">
-            {{ level }}
+            {{ data.level }}
           </p>
           <h2 class="title is-4 content is-marginless">Eventos</h2>
           <p class="content">{{ data.occurrences }}</p>
@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     isLevel() {
-      switch (this.level) {
+      switch (this.data.level) {
         case "error":
           return "is-danger";
         case "warning":
@@ -64,9 +64,9 @@ export default {
   },
   async created() {
     let { data } = await axios.get(
-      "https://my-json-server.typicode.com/Icaruspooky/test-db/" + this.slug
+      "https://my-json-server.typicode.com/Icaruspooky/test-db/data"
     );
-    this.data = data.data;
+    this.data = data;
   }
 };
 </script>
