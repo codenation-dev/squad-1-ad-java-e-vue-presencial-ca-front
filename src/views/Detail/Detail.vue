@@ -64,7 +64,7 @@ export default {
   },
   async created() {
     let { data } = await axios.get(
-      "https://my-json-server.typicode.com/Icaruspooky/test-db/data"
+      "https://my-json-server.typicode.com/Icaruspooky/test-db/" + this.slug
     );
     this.data = data;
   }
