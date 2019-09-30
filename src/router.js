@@ -21,24 +21,28 @@ export default new Router({
         {
           path: "/home",
           name: "home",
-          component: Home
+          component: Home,
+          meta: { transitionName: "slide" }
         },
         {
           path: "/detail",
           name: "detail",
-          component: Detail
+          component: Detail,
+          meta: { transitionName: "slide" }
         }
       ]
     },
     {
       path: "/login",
       name: "login",
-      component: Login
+      component: Login,
+      meta: { transitionName: "slide" }
     },
     {
       name: "register",
       path: "/register",
-      component: Register
+      component: Register,
+      meta: { transitionName: "slide" }
     },
     {
       path: "**",

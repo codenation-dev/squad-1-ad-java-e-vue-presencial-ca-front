@@ -15,6 +15,9 @@
 
           <div class="login-buttons">
             <Button class="has-text-centered" label="Enviar" isPrimary />
+            <router-link :to="{ name: 'login' }">
+              <Button class="back" label="Voltar" isOutlined isPrimary />
+            </router-link>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@
     <button
       class="button"
       :class="{ 'is-primary': isPrimary, 'is-outlined': isOutlined }"
+      :disabled="isDisabled"
     >
       {{ label }}
     </button>
@@ -14,7 +15,8 @@ export default {
   props: {
     label: String,
     isPrimary: Boolean,
-    isOutlined: Boolean
+    isOutlined: Boolean,
+    isDisabled: Boolean
   }
 };
 </script>
