@@ -11,7 +11,7 @@
         <Input
           v-model="form.password"
           label="Senha"
-          type="text"
+          type="password"
           placeholder="Senha"
         />
 
