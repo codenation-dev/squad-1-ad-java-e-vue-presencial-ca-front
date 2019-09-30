@@ -61,7 +61,6 @@ export default {
         await this.login(form);
         this.$router.push({ name: "home" });
       } catch (error) {
-        console.log(JSON.stringify(error));
         this.setError(error.message);
       }
     }

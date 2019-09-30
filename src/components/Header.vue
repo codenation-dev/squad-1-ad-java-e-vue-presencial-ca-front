@@ -28,13 +28,10 @@ export default {
   methods: {
     ...mapActions("auth", ["logout"]),
     async exit() {
-      try {
-        await this.logout();
-        this.$router.push({ name: "login" });
-      } catch (error) {
-        console.log(JSON.stringify(error));
-        // this.setError(error.message);
-      }
+      // try {
+      await this.logout();
+      this.$router.push({ name: "login" });
+      // } catch (error) {}
     }
   }
 };
