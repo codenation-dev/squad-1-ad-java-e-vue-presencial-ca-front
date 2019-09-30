@@ -6,24 +6,26 @@
       </section>
       <section class="card-header-title">
         <div class="description">
-          <h1 class="title is 2">Erro no {{ origin }} em {{ timestamp }}</h1>
+          <h1 class="title is 2">
+            Erro no {{ data.origin }} em {{ data.timestamp }}
+          </h1>
         </div>
       </section>
       <section class="card-content columns level">
         <div class="column is-8 level left">
           <h2 class="title is-4">Título</h2>
-          <p class="content">{{ description }}</p>
+          <p class="content">{{ data.description }}</p>
           <h2 class="title is-4">Detalhes</h2>
-          <p class="content">{{ details }}</p>
+          <p class="content">{{ data.details }}</p>
         </div>
         <div class="column is-2 level right">
           <p :class="isLevel" class="tag is-medium has-text-centered">
-            {{ level }}
+            {{ data.level }}
           </p>
           <h2 class="title is-4 content is-marginless">Eventos</h2>
-          <p class="content">{{ occurrences }}</p>
+          <p class="content">{{ data.occurrences }}</p>
           <h2 class="title is-4 is-marginless">Coletado por</h2>
-          <p class="content">{{ token }}</p>
+          <p class="content">{{ data.token }}</p>
         </div>
       </section>
     </div>
@@ -32,6 +34,7 @@
 
 <script>
 import Button from "@/components/Button";
+import axios from "axios";
 
 export default {
   components: {
@@ -42,7 +45,7 @@ export default {
   },
   computed: {
     isLevel() {
-      switch (this.level) {
+      switch (this.data.level) {
         case "error":
           return "is-danger";
         case "warning":
@@ -56,16 +59,14 @@ export default {
   },
   data() {
     return {
-      origin: "Lorem Ipsum passage",
-      timestamp: new Date(),
-      description:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet",
-      details:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      level: "error",
-      occurrences: 455,
-      token: "485449898298"
+      data: {}
     };
+  },
+  async created() {
+    let { data } = await axios.get(
+      "https://my-json-server.typicode.com/Icaruspooky/test-db/" + this.slug
+    );
+    this.data = data;
   }
 };
 </script>

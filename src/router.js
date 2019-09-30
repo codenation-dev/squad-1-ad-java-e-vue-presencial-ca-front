@@ -25,10 +25,11 @@ export default new Router({
           meta: { transitionName: "slide" }
         },
         {
-          path: "/detail",
+          path: "/detail/:slug",
           name: "detail",
           component: Detail,
-          meta: { transitionName: "slide" }
+          meta: { transitionName: "slide" },
+          props: true
         }
       ]
     },

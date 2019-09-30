@@ -2,10 +2,14 @@
   <div>
     <FilterLog />
     <div class="container">
-      <h1>This is an home page</h1>
-      <router-link :to="{ name: 'detail', params: { slug: 'data' } }">
-        <button>detalhe</button>
-      </router-link>
+      <RouterLink
+        :to="{
+          name: 'detail',
+          props: { slug: 'data' },
+          params: { slug: 'data' }
+        }"
+        >Detail Example</RouterLink
+      >
     </div>
   </div>
 </template>
