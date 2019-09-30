@@ -17,9 +17,17 @@
 <script>
 import FilterLog from "@/components/FilterLog";
 
+import axios from "axios";
+
 export default {
   components: {
     FilterLog
+  },
+  async created() {
+    let { data } = await axios.get(
+      "https://production-squad-one.herokuapp.com/logs"
+    );
+    this.data = data;
   }
 };
 </script>

@@ -1,20 +1,24 @@
 import axios from "axios";
+import qs from "qs";
+
 import { domain } from "env";
 
-async function get(path, config) {
-  try {
-    await axios.get(`${domain}/${path}`, config);
-  } catch (error) {
-    throw new Error(error);
-  }
+export async function get(path, headers) {
+  const data = await axios.get(`${domain}/${path}`, headers);
+
+  return data;
 }
 
-async function post(path, form) {
-  try {
-    await axios.post(`${domain}/${path}`, form);
-  } catch (error) {
-    throw new Error(error);
-  }
+export async function post(path, form, headers) {
+  const data = await axios.post(`${domain}/${path}`, form, { headers });
+
+  return data;
 }
 
-export { get, post };
+export async function postUrlEncoded(path, form, headers) {
+  const data = await axios.post(`${domain}/${path}`, qs.stringify(form), {
+    headers
+  });
+
+  return data;
+}

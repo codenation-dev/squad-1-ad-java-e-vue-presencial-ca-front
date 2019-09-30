@@ -1,10 +1,10 @@
 import router from "@/router";
 
 export default config => {
-  if (location.pathname != "/login") {
+  if (global.location.pathname != "/login") {
     try {
-      const auth = localStorage.getItem("state");
-      const { access_token } = JSON.parse(auth).login.oauth;
+      const { auth } = JSON.parse(localStorage.getItem("state"));
+      const { access_token } = auth.oauth;
       if (!config.headers.Authorization) {
         config.headers.Authorization = `Bearer ${access_token}`;
       }

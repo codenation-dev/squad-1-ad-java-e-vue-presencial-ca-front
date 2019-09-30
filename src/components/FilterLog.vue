@@ -72,6 +72,7 @@ export default {
 
 .filter-section {
   background-color: $primary-invert;
+  box-shadow: 0 0 5px rgba($black, 0.25), 0 0 0 1px rgba($black, 0.1);
 }
 
 .filter-log {

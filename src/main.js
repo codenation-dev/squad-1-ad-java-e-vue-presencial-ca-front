@@ -9,6 +9,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import router from "./router";
 import App from "./App.vue";
 import interceptor from "@/utils/interceptor";
+import store from "@/store/index";
 
 axios.interceptors.request.use(interceptor);
 
@@ -23,6 +24,7 @@ Vue.use(Buefy, {
 Vue.config.productionTip = false;
 
 new Vue({
+  store,
   router,
   render: h => h(App)
 }).$mount("#app");
