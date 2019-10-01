@@ -13,7 +13,7 @@
             <a class="button is-primary">
               <strong>Sign up</strong>
             </a>
-            <a class="button is-light">Log in</a>
+            <a class="button is-light" @click="exit">Log out</a>
           </div>
         </div>
       </div>
@@ -22,7 +22,19 @@
 </template>
 
 <script>
-export default {};
+import { mapActions } from "vuex";
+
+export default {
+  methods: {
+    ...mapActions("auth", ["logout"]),
+    async exit() {
+      // try {
+      await this.logout();
+      this.$router.push({ name: "login" });
+      // } catch (error) {}
+    }
+  }
+};
 </script>
 
 <style lang="scss"></style>

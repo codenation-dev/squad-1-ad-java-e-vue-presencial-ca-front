@@ -21,25 +21,29 @@ export default new Router({
         {
           path: "/home",
           name: "home",
-          component: Home
+          component: Home,
+          meta: { transitionName: "slide" }
         },
         {
           path: "/detail/:slug",
           name: "detail",
-          props: true,
-          component: Detail
+          component: Detail,
+          meta: { transitionName: "slide" },
+          props: true
         }
       ]
     },
     {
       path: "/login",
       name: "login",
-      component: Login
+      component: Login,
+      meta: { transitionName: "slide" }
     },
     {
       name: "register",
       path: "/register",
-      component: Register
+      component: Register,
+      meta: { transitionName: "slide" }
     },
     {
       path: "**",
