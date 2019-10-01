@@ -19,9 +19,7 @@
           <p class="content">{{ data.details }}</p>
         </div>
         <div class="column is-2 level right">
-          <p :class="isLevel" class="tag is-medium has-text-centered">
-            {{ data.level }}
-          </p>
+          <Level :level="data.level"></Level>
           <h2 class="title is-4 content is-marginless">Eventos</h2>
           <p class="content">{{ data.occurrences }}</p>
           <h2 class="title is-4 is-marginless">Coletado por</h2>
@@ -34,28 +32,16 @@
 
 <script>
 import Button from "@/components/Button";
+import Level from "@/components/Level";
 import axios from "axios";
 
 export default {
   components: {
-    Button
+    Button,
+    Level
   },
   props: {
     slug: String
-  },
-  computed: {
-    isLevel() {
-      switch (this.data.level) {
-        case "error":
-          return "is-danger";
-        case "warning":
-          return "is-warning";
-        case "info":
-          return "is-info";
-        default:
-          return "";
-      }
-    }
   },
   data() {
     return {
