@@ -35,9 +35,6 @@ export default {
         commit("setError", "");
       }, 3000);
     }
-    // async signup(context, form) {
-    //   await post(`${domain}/users`, form);
-    // }
   },
   mutations: {
     save_token(state, oauth) {
