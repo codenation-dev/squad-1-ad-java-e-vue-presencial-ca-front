@@ -2,7 +2,9 @@
   <div class="container">
     <div class="card">
       <section>
-        <Button class="back" label="Voltar" isOutlined isPrimary />
+        <router-link :to="{ name: 'home' }">
+          <Button class="back" label="Voltar" isOutlined isPrimary></Button>
+        </router-link>
       </section>
       <section class="card-header-title">
         <div class="description">
