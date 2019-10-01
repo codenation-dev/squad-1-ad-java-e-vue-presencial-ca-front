@@ -9,7 +9,7 @@
       <div class="is-flex description-login">
         <h1 class="title">Bem vindo a Logs One.</h1>
         <p>
-          Plataforma de consulta e acesso de logs de maneira intuitiva e eficaz.
+          Plataforma de consulta e acesso de logs.
         </p>
       </div>
     </div>

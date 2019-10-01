@@ -6,15 +6,15 @@
 
         <p class="navbar-item">Seu token é: qwerty123456</p>
       </div>
-    </div>
 
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light" @click="exit">Log out</a>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary">
+              <strong>Sign up</strong>
+            </a>
+            <a class="button is-light" @click="exit">Log out</a>
+          </div>
         </div>
       </div>
     </div>
