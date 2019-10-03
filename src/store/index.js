@@ -13,6 +13,12 @@ export default new Vuex.Store({
   ],
   modules: {
     auth,
-    home
+    home: {
+      mutations: {
+        delete_user_info(state) {
+          delete state.userInfo;
+        }
+      }
+    }
   }
 });

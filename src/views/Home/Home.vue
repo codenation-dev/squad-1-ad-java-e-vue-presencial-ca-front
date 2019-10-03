@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 import FilterLog from "@/components/FilterLog";
 import Logs from "@/components/Logs";
@@ -20,10 +20,15 @@ export default {
     Logs,
     FilterLog
   },
+  computed: {
+    ...mapGetters("home", ["getUserInfo"])
+  },
   methods: {
     ...mapActions("home", ["getUser"]),
     async getInfo() {
-      await this.getUser();
+      if (!this.getUserInfo()) {
+        await this.getUser();
+      }
     }
   },
   async created() {
