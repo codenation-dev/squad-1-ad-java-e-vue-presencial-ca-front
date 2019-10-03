@@ -4,7 +4,8 @@ export default {
   namespaced: true,
   state: {
     oauth: {},
-    error: ""
+    error: "",
+    hasPermission: false
   },
   actions: {
     async login({ commit }, form) {
@@ -23,6 +24,7 @@ export default {
 
       if (data) {
         commit("save_token", data);
+        commit("set_logged", true);
       } else {
         throw new Error("Email ou senha incorretos");
       }
@@ -31,6 +33,7 @@ export default {
       await get("oauth/logout");
 
       commit("remove_token");
+      commit("set_logged", false);
     },
     async setError({ commit }, error) {
       commit("setError", error);
@@ -59,6 +62,9 @@ export default {
     save_token(state, oauth) {
       state.oauth = oauth;
     },
+    set_logged(state, permission) {
+      state.hasPermission = permission;
+    },
     remove_token(state) {
       delete state.oauth;
     },
@@ -69,6 +75,9 @@ export default {
   getters: {
     getError(state) {
       return state.error;
+    },
+    hasPermission(state) {
+      return state.hasPermission;
     }
   }
 };
