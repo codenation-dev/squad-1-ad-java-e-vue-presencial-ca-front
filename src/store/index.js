@@ -11,13 +11,6 @@ export default new Vuex.Store({
     new VuexPersistence({ storage: global.localStorage, key: "state" }).plugin
   ],
   modules: {
-    auth,
-    home: {
-      mutations: {
-        delete_user_info(state) {
-          delete state.userInfo;
-        }
-      }
-    }
+    auth
   }
 });
