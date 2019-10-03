@@ -42,7 +42,7 @@ export default {
 @import "@/theme.scss";
 
 .card {
-  margin-bottom: 10vh;
+  margin-bottom: 5vh;
 }
 
 .description-login {

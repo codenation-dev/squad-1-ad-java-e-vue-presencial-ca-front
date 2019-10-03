@@ -3,14 +3,14 @@
     <form @submit.prevent="submit(form)" autocomplete="off">
       <div class="card-content login-content">
         <Input
-          v-model="form.username"
+          v-model="form.email"
           label="Email"
           type="text"
           placeholder="Email"
           autocomplete="off"
         />
-        <span v-if="usernamePatternError" class="help is-danger">
-          {{ usernamePatternError }}
+        <span v-if="emailPatternError" class="help is-danger">
+          {{ emailPatternError }}
         </span>
 
         <Input
@@ -63,7 +63,7 @@ export default {
   data() {
     return {
       form: {
-        username: "",
+        email: "",
         password: ""
       },
       error: false,
@@ -77,8 +77,8 @@ export default {
         ? "Campo obrigatório e com mínimo de 6 caracteres"
         : undefined;
     },
-    usernamePatternError() {
-      const { $invalid, $anyDirty } = this.$v.form.username;
+    emailPatternError() {
+      const { $invalid, $anyDirty } = this.$v.form.email;
       return $invalid && $anyDirty
         ? "Campo com formato de email obrigatório"
         : undefined;
@@ -86,7 +86,7 @@ export default {
   },
   validations: {
     form: {
-      username: { ...generalValidate, email },
+      email: { ...generalValidate, email },
       password: { ...generalValidate }
     }
   },

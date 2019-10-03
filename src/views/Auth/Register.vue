@@ -22,13 +22,13 @@
             {{ lastNamePatternError }}
           </span>
           <Input
-            v-model="form.username"
+            v-model="form.email"
             label="Email"
             type="text"
             placeholder="Email"
           />
-          <span v-if="usernamePatternError" class="help is-danger">
-            {{ usernamePatternError }}
+          <span v-if="emailPatternError" class="help is-danger">
+            {{ emailPatternError }}
           </span>
           <Input
             v-model="form.password"
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import {
   email,
   maxLength,
@@ -94,7 +95,7 @@ export default {
         lastName: "",
         password: "",
         passwordConfirm: "",
-        username: ""
+        email: ""
       },
       error: false,
       messageError: ""
@@ -107,8 +108,8 @@ export default {
         ? "Campo obrigatório e com mínimo de 6 caracteres"
         : null;
     },
-    usernamePatternError() {
-      const { $invalid, $anyDirty } = this.$v.form.username;
+    emailPatternError() {
+      const { $invalid, $anyDirty } = this.$v.form.email;
       return $invalid && $anyDirty
         ? "Campo com formato de email obrigatório"
         : undefined;
@@ -134,7 +135,7 @@ export default {
     form: {
       firstName: { ...generalValidate },
       lastName: { ...generalValidate },
-      username: { ...generalValidate, email },
+      email: { ...generalValidate, email },
       password: { ...generalValidate },
       passwordConfirm: {
         ...generalValidate,
@@ -143,19 +144,21 @@ export default {
     }
   },
   methods: {
-    // ...mapActions("auth", ["login", "setError"]),
+    ...mapActions("auth", ["login", "signUp", "setError"]),
     async submit(form) {
       this.$v.$touch();
       if (this.$v.$invalid) {
         return;
       }
-      console.log("submit ", form);
-      // try {
-      //   const data = await this.login(form);
-      //   this.$router.push({ name: "home" });
-      // } catch (error) {
-      //   this.setError(error.message);
-      // }
+
+      try {
+        delete form.passwordConfirm;
+        await this.signUp(form);
+
+        this.$router.push({ name: "login" });
+      } catch (error) {
+        this.setError(error);
+      }
     }
   }
 };
