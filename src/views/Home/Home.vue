@@ -1,9 +1,6 @@
 <template>
   <div>
-    <FilterLog
-      @reloadData="reloadData()"
-      :queryParams="queryParams"
-    />
+    <FilterLog @reloadData="reloadData()" :queryParams="queryParams" />
     <div class="container">
       <Logs :data="data" />
     </div>
@@ -41,7 +38,6 @@ export default {
     async reloadData() {
       let sumarized =
         "https://production-squad-one.herokuapp.com/logs/sumarized";
-      console.log(this.queryParams.options);
       let { data } = await axios.get(
         sumarized + "?environment=" + this.queryParams.options
       );
