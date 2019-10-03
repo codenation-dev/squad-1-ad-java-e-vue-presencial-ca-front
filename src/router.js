@@ -71,6 +71,9 @@ router.beforeEach((to, from, next) => {
     if (to.name === "detail") {
       next("/login");
     }
+    if (to.name === "users") {
+      next("/login");
+    }
   }
   next();
 });
