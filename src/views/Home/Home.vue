@@ -57,4 +57,12 @@ export default {
   padding-top: 10vw;
   width: 50vw;
 }
+
+.no-results-img {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 40vw;
+}
 </style>
