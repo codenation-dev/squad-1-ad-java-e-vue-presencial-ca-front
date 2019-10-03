@@ -15,6 +15,8 @@ html,
 body {
   width: 100%;
   height: 100%;
+  position: fixed;
+  overflow-y: auto;
   background: rgb(220, 220, 220);
   background: radial-gradient(
     circle,
