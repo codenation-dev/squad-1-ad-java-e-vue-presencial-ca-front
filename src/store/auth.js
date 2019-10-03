@@ -34,6 +34,7 @@ export default {
 
       commit("remove_token");
       commit("set_logged", false);
+      commit("delete_user_info", null, { root: true });
     },
     async setError({ commit }, error) {
       commit("setError", error);
