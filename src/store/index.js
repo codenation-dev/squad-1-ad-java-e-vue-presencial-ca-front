@@ -3,7 +3,6 @@ import Vuex from "vuex";
 import VuexPersistence from "vuex-persist";
 
 import auth from "./auth";
-import home from "./home";
 
 Vue.use(Vuex);
 
