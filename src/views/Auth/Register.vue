@@ -1,17 +1,54 @@
 <template>
-  <div class="columns">
-    <div class="column is-4 is-offset-4">
+  <Auth>
+    <form @submit.prevent="submit(form)">
       <div class="card">
         <div class="card-content login">
-          <Input label="Nome" type="text" placeholder="Nome" />
-          <Input label="Sobrenome" type="text" placeholder="Sobrenome" />
-          <Input label="Email" type="text" placeholder="Email" />
-          <Input label="Senha" type="text" placeholder="Senha" />
           <Input
-            label="Confirme sua senha"
+            v-model="form.firstName"
+            label="Nome"
             type="text"
+            placeholder="Nome"
+          />
+          <span v-if="firstNamePatternError" class="help is-danger">
+            {{ firstNamePatternError }}
+          </span>
+          <Input
+            v-model="form.lastName"
+            label="Sobrenome"
+            type="text"
+            placeholder="Sobrenome"
+          />
+          <span v-if="lastNamePatternError" class="help is-danger">
+            {{ lastNamePatternError }}
+          </span>
+          <Input
+            v-model="form.username"
+            label="Email"
+            type="text"
+            placeholder="Email"
+          />
+          <span v-if="usernamePatternError" class="help is-danger">
+            {{ usernamePatternError }}
+          </span>
+          <Input
+            v-model="form.password"
+            label="Senha"
+            type="password"
+            placeholder="Senha"
+            :error="passwordPatternError"
+          />
+          <span v-if="passwordPatternError" class="help is-danger">
+            {{ passwordPatternError }}
+          </span>
+          <Input
+            v-model="form.passwordConfirm"
+            label="Confirme sua senha"
+            type="password"
             placeholder="Confirme sua senha"
           />
+          <span v-if="passwordConfirmPatternError" class="help is-danger">
+            {{ passwordConfirmPatternError }}
+          </span>
 
           <div class="login-buttons">
             <Button class="has-text-centered" label="Enviar" isPrimary />
@@ -21,18 +58,105 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </form>
+  </Auth>
 </template>
 
 <script>
+import {
+  email,
+  maxLength,
+  minLength,
+  required,
+  sameAs
+} from "vuelidate/lib/validators";
+
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import Auth from "@/layouts/Auth";
+
+const generalValidate = {
+  required,
+  minLength: minLength(3),
+  maxLength: maxLength(60)
+};
 
 export default {
   components: {
     Button,
-    Input
+    Input,
+    Auth
+  },
+  data() {
+    return {
+      form: {
+        firstName: "",
+        lastName: "",
+        password: "",
+        passwordConfirm: "",
+        username: ""
+      },
+      error: false,
+      messageError: ""
+    };
+  },
+  computed: {
+    passwordPatternError() {
+      const { $invalid, $anyDirty } = this.$v.form.password;
+      return $invalid && $anyDirty
+        ? "Campo obrigatório e com mínimo de 6 caracteres"
+        : null;
+    },
+    usernamePatternError() {
+      const { $invalid, $anyDirty } = this.$v.form.username;
+      return $invalid && $anyDirty
+        ? "Campo com formato de email obrigatório"
+        : undefined;
+    },
+    firstNamePatternError() {
+      const { $invalid, $anyDirty } = this.$v.form.firstName;
+      return $invalid && $anyDirty ? "Campo nome é obrigatório" : undefined;
+    },
+    lastNamePatternError() {
+      const { $invalid, $anyDirty } = this.$v.form.lastName;
+      return $invalid && $anyDirty
+        ? "Campo obrigatório e com mínimo de 6 caracteres"
+        : undefined;
+    },
+    passwordConfirmPatternError() {
+      const { $invalid, $anyDirty } = this.$v.form.passwordConfirm;
+      return $invalid && $anyDirty
+        ? "Campos senha não correspondem"
+        : undefined;
+    }
+  },
+  validations: {
+    form: {
+      firstName: { ...generalValidate },
+      lastName: { ...generalValidate },
+      username: { ...generalValidate, email },
+      password: { ...generalValidate },
+      passwordConfirm: {
+        ...generalValidate,
+        sameAsPassword: sameAs("password")
+      }
+    }
+  },
+  methods: {
+    // ...mapActions("auth", ["login", "setError"]),
+    async submit(form) {
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }
+      console.log("submit ", form);
+      // try {
+      //   const data = await this.login(form);
+      //   this.$router.push({ name: "home" });
+      // } catch (error) {
+      //   this.setError(error.message);
+      // }
+    }
   }
 };
 </script>

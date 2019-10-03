@@ -1,19 +1,28 @@
 <template>
   <Auth>
-    <form @submit.prevent="submit(form)">
+    <form @submit.prevent="submit(form)" autocomplete="off">
       <div class="card-content login-content">
         <Input
           v-model="form.username"
           label="Email"
           type="text"
           placeholder="Email"
+          autocomplete="off"
         />
+        <span v-if="usernamePatternError" class="help is-danger">
+          {{ usernamePatternError }}
+        </span>
+
         <Input
           v-model="form.password"
           label="Senha"
           type="password"
           placeholder="Senha"
+          autocomplete="off"
         />
+        <span v-if="passwordPatternError" class="help is-danger">
+          {{ passwordPatternError }}
+        </span>
 
         <div class="login-buttons">
           <Button class="has-text-centered" label="Enviar" isPrimary />
@@ -32,11 +41,23 @@
 </template>
 
 <script>
+import {
+  email,
+  maxLength,
+  minLength,
+  required
+} from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
+
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Auth from "@/layouts/Auth";
 
-import { mapActions } from "vuex";
+const generalValidate = {
+  required,
+  minLength: minLength(6),
+  maxLength: maxLength(60)
+};
 
 export default {
   data() {
@@ -49,6 +70,26 @@ export default {
       messageError: ""
     };
   },
+  computed: {
+    passwordPatternError() {
+      const { $invalid, $anyDirty } = this.$v.form.password;
+      return $invalid && $anyDirty
+        ? "Campo obrigatório e com mínimo de 6 caracteres"
+        : undefined;
+    },
+    usernamePatternError() {
+      const { $invalid, $anyDirty } = this.$v.form.username;
+      return $invalid && $anyDirty
+        ? "Campo com formato de email obrigatório"
+        : undefined;
+    }
+  },
+  validations: {
+    form: {
+      username: { ...generalValidate, email },
+      password: { ...generalValidate }
+    }
+  },
   components: {
     Auth,
     Button,
@@ -57,8 +98,14 @@ export default {
   methods: {
     ...mapActions("auth", ["login", "setError"]),
     async submit(form) {
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }
+
       try {
         await this.login(form);
+
         this.$router.push({ name: "home" });
       } catch (error) {
         this.setError(error.message);
