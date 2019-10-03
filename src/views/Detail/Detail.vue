@@ -9,23 +9,23 @@
       <section class="card-header-title">
         <div class="description">
           <h1 class="title is 2">
-            Erro no {{ data.origin }} em {{ data.timestamp }}
+            Erro no {{ data.origin.origin }} em {{ date }}
           </h1>
         </div>
       </section>
       <section class="card-content columns level">
         <div class="column is-8 level left">
           <h2 class="title is-4">Título</h2>
-          <p class="content">{{ data.description }}</p>
+          <p class="content">{{ data.message }}</p>
           <h2 class="title is-4">Detalhes</h2>
           <p class="content">{{ data.details }}</p>
         </div>
         <div class="column is-2 level right">
-          <Level :level="data.level"></Level>
+          <Level :level="data.severity"></Level>
           <h2 class="title is-4 content is-marginless">Eventos</h2>
-          <p class="content">{{ data.occurrences }}</p>
+          <p class="content">{{ events }}</p>
           <h2 class="title is-4 is-marginless">Coletado por</h2>
-          <p class="content">{{ data.token }}</p>
+          <p class="content">{{ data.reportedBy.id }}</p>
         </div>
       </section>
     </div>
@@ -43,6 +43,7 @@ export default {
     Level
   },
   props: {
+    events: String,
     slug: String
   },
   data() {
@@ -52,9 +53,14 @@ export default {
   },
   async created() {
     let { data } = await axios.get(
-      "https://my-json-server.typicode.com/Icaruspooky/test-db/" + this.slug
+      "https://production-squad-one.herokuapp.com/logs/" + this.slug
     );
     this.data = data;
+  },
+  computed: {
+    date: function() {
+      return new Date(this.data.createdAt).toLocaleString("pt-BR");
+    }
   }
 };
 </script>

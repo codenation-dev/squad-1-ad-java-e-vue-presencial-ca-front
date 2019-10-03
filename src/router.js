@@ -5,6 +5,7 @@ import Home from "@/views/Home/Home";
 import Login from "@/views/Auth/Login";
 import Register from "@/views/Auth/Register";
 import Detail from "@/views/Detail/Detail";
+import Users from "@/views/Users/Users";
 import Main from "@/layouts/Main";
 
 Vue.use(Router);
@@ -30,6 +31,12 @@ export default new Router({
           component: Detail,
           meta: { transitionName: "slide" },
           props: true
+        },
+        {
+          path: "/users",
+          name: "users",
+          component: Users,
+          meta: { transitionName: "slide" }
         }
       ]
     },
