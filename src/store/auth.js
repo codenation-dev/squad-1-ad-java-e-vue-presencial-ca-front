@@ -39,7 +39,8 @@ export default {
         commit("setError", "");
       }, 3000);
     },
-    async signUp(form) {
+    // eslint-disable-next-line no-unused-vars
+    async signUp({ commit }, form) {
       const headers = {
         "Content-Type": "application/json",
         Authorization: `Basic ${btoa(

@@ -3,7 +3,7 @@
     <form @submit.prevent="submit(form)" autocomplete="off">
       <div class="card-content login-content">
         <Input
-          v-model="form.email"
+          v-model="form.username"
           label="Email"
           type="text"
           placeholder="Email"
@@ -55,7 +55,7 @@ import Auth from "@/layouts/Auth";
 
 const generalValidate = {
   required,
-  minLength: minLength(6),
+  minLength: minLength(3),
   maxLength: maxLength(60)
 };
 
@@ -63,7 +63,7 @@ export default {
   data() {
     return {
       form: {
-        email: "",
+        username: "",
         password: ""
       },
       error: false,
@@ -78,7 +78,7 @@ export default {
         : undefined;
     },
     emailPatternError() {
-      const { $invalid, $anyDirty } = this.$v.form.email;
+      const { $invalid, $anyDirty } = this.$v.form.username;
       return $invalid && $anyDirty
         ? "Campo com formato de email obrigatório"
         : undefined;
@@ -86,7 +86,7 @@ export default {
   },
   validations: {
     form: {
-      email: { ...generalValidate, email },
+      username: { ...generalValidate, email },
       password: { ...generalValidate }
     }
   },
