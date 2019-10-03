@@ -16,10 +16,19 @@
       :data="data"
       :checked-rows.sync="checkedRows"
       :is-row-checkable="row => row.id !== 3"
+      sortIcon="arrow-up"
+      default-sort="severity"
+      default-sort-direction="asc"
       checkable
     >
       <template slot-scope="props">
-        <b-table-column field="level" label="Level" width="40" centered>
+        <b-table-column
+          field="severity"
+          label="Level"
+          width="40"
+          sortable
+          centered
+        >
           <Level :level="props.row.severity"></Level>
         </b-table-column>
 
@@ -27,7 +36,14 @@
           <Log :data="props.row"></Log>
         </b-table-column>
 
-        <b-table-column field="eventos" label="Eventos" width="40" centered>
+        <b-table-column
+          field="occurrences"
+          label="Eventos"
+          width="40"
+          sortable
+          numeric
+          centered
+        >
           {{ props.row.occurrences }}
         </b-table-column>
       </template>

@@ -8,7 +8,7 @@
             v-model="form.options"
             @change="submit(form)"
           />
-          <Select :options="orderOptions" v-model="form.order" />
+          <!-- <Select :options="orderOptions" v-model="form.order" /> -->
         </div>
 
         <div class="level-right">
