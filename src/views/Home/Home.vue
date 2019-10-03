@@ -2,7 +2,15 @@
   <div>
     <FilterLog @reloadData="reloadData()" :queryParams="queryParams" />
     <div class="container">
-      <Logs :data="data" />
+      <div v-if="noResults" class="no-results">
+        <img
+          class="no-results-img"
+          src="@/assets/img/no-results.png"
+          alt="no results"
+        />
+      </div>
+
+      <Logs v-else :data="data" />
     </div>
   </div>
 </template>
@@ -17,7 +25,8 @@ export default {
   data() {
     return {
       queryParams: { options: "" },
-      data: []
+      data: [],
+      noResults: false
     };
   },
   components: {
@@ -32,6 +41,8 @@ export default {
         sumarized + "?environment=" + this.queryParams.options
       );
       this.data = data.content;
+
+      this.noResults = data.totalElements == 0 ? true : false;
     }
   },
   async created() {
@@ -40,4 +51,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.no-results {
+  margin: auto;
+  padding-top: 10vw;
+  width: 50vw;
+}
+</style>
