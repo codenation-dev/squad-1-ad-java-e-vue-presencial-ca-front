@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FilterLog :queryParams="queryParams" />
+    <FilterLog @reloadData="reloadData()" :queryParams="queryParams" />
     <div class="container">
       <Logs :data="data" />
     </div>
@@ -17,7 +17,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      queryParams: {},
+      queryParams: { options: "" },
       data: []
     };
   },
@@ -34,18 +34,21 @@ export default {
       if (!this.getUserInfo()) {
         await this.getUser();
       }
+    },
+    async reloadData() {
+      console.log("Reloaded");
+      let sumarized =
+        "https://production-squad-one.herokuapp.com/logs/sumarized";
+      console.log(this.queryParams.options);
+      let { data } = await axios.get(
+        sumarized + "?environment=" + this.queryParams.options
+      );
+      this.data = data.content;
     }
   },
   async created() {
     await this.getInfo();
-
-    let { data } = await axios.get(
-      "https://production-squad-one.herokuapp.com/logs/sumarized/",
-      { params: this.queryParams.environmentOptions }
-    );
-    if (data.content[0]) {
-      this.data = data.content;
-    }
+    await this.reloadData();
   }
 };
 </script>
