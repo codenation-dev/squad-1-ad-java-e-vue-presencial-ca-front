@@ -10,6 +10,7 @@
 <script>
 import FilterLog from "@/components/FilterLog";
 import Logs from "@/components/Logs";
+
 import axios from "axios";
 
 export default {
@@ -23,16 +24,7 @@ export default {
     Logs,
     FilterLog
   },
-  computed: {
-    ...mapGetters("home", ["getUserInfo"])
-  },
   methods: {
-    ...mapActions("home", ["getUser"]),
-    async getInfo() {
-      if (!this.getUserInfo()) {
-        await this.getUser();
-      }
-    },
     async reloadData() {
       let sumarized =
         "https://production-squad-one.herokuapp.com/logs/sumarized";
