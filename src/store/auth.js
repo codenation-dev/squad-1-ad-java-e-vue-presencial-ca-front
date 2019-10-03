@@ -1,32 +1,40 @@
-import { get, postUrlEncoded } from "@/utils/service";
-
-const headers = {
-  "Content-Type": "application/x-www-form-urlencoded",
-  Authorization: `Basic ${btoa(
-    "WHO_IS_MINE_BEAUTY_FRONTEND_APPLICATION:YOU_IS"
-  )}`
-};
+import { get, postUrlEncoded, post } from "@/utils/service";
 
 export default {
   namespaced: true,
   state: {
     oauth: {},
-    error: ""
+    error: "",
+    hasPermission: false
   },
   actions: {
     async login({ commit }, form) {
+      const headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${btoa(
+          "WHO_IS_MINE_BEAUTY_FRONTEND_APPLICATION:YOU_IS"
+        )}`
+      };
+
       const { data } = await postUrlEncoded(
         "oauth/token",
         { ...form, grant_type: "password" },
         headers
       );
 
-      commit("save_token", data);
+      if (data) {
+        commit("save_token", data);
+        commit("set_logged", true);
+      } else {
+        throw new Error("Email ou senha incorretos");
+      }
     },
     async logout({ commit }) {
       await get("oauth/logout");
 
       commit("remove_token");
+      commit("set_logged", false);
+      commit("delete_user_info", null, { root: true });
     },
     async setError({ commit }, error) {
       commit("setError", error);
@@ -34,11 +42,29 @@ export default {
       setTimeout(() => {
         commit("setError", "");
       }, 3000);
+    },
+    // eslint-disable-next-line no-unused-vars
+    async signUp({ commit }, form) {
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${btoa(
+          "WHO_IS_MINE_BEAUTY_FRONTEND_APPLICATION:YOU_IS"
+        )}`
+      };
+
+      const { data } = await post("user", { ...form }, headers);
+
+      if (!data) {
+        throw new Error("Erro na criação do usuário. Tente novamente.");
+      }
     }
   },
   mutations: {
     save_token(state, oauth) {
       state.oauth = oauth;
+    },
+    set_logged(state, permission) {
+      state.hasPermission = permission;
     },
     remove_token(state) {
       delete state.oauth;
@@ -50,6 +76,9 @@ export default {
   getters: {
     getError(state) {
       return state.error;
+    },
+    hasPermission(state) {
+      return state.hasPermission;
     }
   }
 };
