@@ -28,6 +28,9 @@
 import Select from "@/components/Select";
 
 export default {
+  props: {
+    queryParams: Object
+  },
   components: {
     Select
   },
@@ -42,7 +45,7 @@ export default {
       environmentOptions: [
         { label: "Produção", value: "DEV" },
         { label: "Desenvolvimento", value: "PROD" },
-        { label: "Homologação", value: "HOMOLOG" }
+        { label: "Homologação", value: "HMG" }
       ],
       orderOptions: [
         { label: "Ordenar por", value: null },
@@ -58,7 +61,9 @@ export default {
     };
   },
   methods: {
-    submit() {}
+    submit() {
+      this.queryParams = this.form;
+    }
   }
 };
 </script>

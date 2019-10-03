@@ -12,11 +12,13 @@ export default {
   computed: {
     isLevel() {
       switch (this.level) {
-        case "error":
+        case "ERROR":
           return "is-danger";
-        case "warning":
+        case "WARNING":
           return "is-warning";
-        case "debug":
+        case "INFO":
+          return "is-success";
+        case "DEBUG":
           return "is-info";
         default:
           return "";
