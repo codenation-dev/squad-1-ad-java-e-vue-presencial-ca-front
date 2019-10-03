@@ -2,25 +2,20 @@
   <div>
     <FilterLog />
     <div class="container">
-      <RouterLink
-        :to="{
-          name: 'detail',
-          props: { slug: 'data' },
-          params: { slug: 'data' }
-        }"
-        >Detail Example</RouterLink
-      >
+      <Logs />
     </div>
   </div>
 </template>
 
 <script>
 import FilterLog from "@/components/FilterLog";
+import Logs from "@/components/Logs";
 
 import axios from "axios";
 
 export default {
   components: {
+    Logs,
     FilterLog
   },
   async created() {
