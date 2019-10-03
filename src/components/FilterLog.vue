@@ -3,7 +3,11 @@
     <div class="filter-section">
       <div class="container level">
         <div class="level-left">
-          <Select :options="environmentOptions" v-model="form.options" />
+          <Select
+            :options="environmentOptions"
+            v-model="form.options"
+            @change="submit(form)"
+          />
           <Select :options="orderOptions" v-model="form.order" />
         </div>
 
@@ -43,8 +47,9 @@ export default {
         search: ""
       },
       environmentOptions: [
-        { label: "Produção", value: "DEV" },
-        { label: "Desenvolvimento", value: "PROD" },
+        { label: "Ambiente", value: "" },
+        { label: "Produção", value: "PROD" },
+        { label: "Desenvolvimento", value: "DEV" },
         { label: "Homologação", value: "HMG" }
       ],
       orderOptions: [
@@ -61,10 +66,12 @@ export default {
     };
   },
   methods: {
-    submit() {
-      this.queryParams = this.form;
+    submit(form) {
+      this.queryParams.options = form.options;
+      this.$emit("reloadData");
     }
-  }
+  },
+  created() {}
 };
 </script>
 
