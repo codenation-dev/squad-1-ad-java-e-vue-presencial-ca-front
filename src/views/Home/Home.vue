@@ -1,6 +1,9 @@
 <template>
   <div>
-    <FilterLog @reloadData="reloadData()" :queryParams="queryParams" />
+    <FilterLog
+      @reloadData="reloadData()"
+      :queryParams="queryParams"
+    />
     <div class="container">
       <Logs :data="data" />
     </div>
@@ -36,7 +39,6 @@ export default {
       }
     },
     async reloadData() {
-      console.log("Reloaded");
       let sumarized =
         "https://production-squad-one.herokuapp.com/logs/sumarized";
       console.log(this.queryParams.options);
