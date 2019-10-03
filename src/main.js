@@ -4,7 +4,11 @@ import axios from "axios";
 import NProgress from "nprogress";
 import Vuelidate from "vuelidate";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faArrowUp,
+  faArrowDown
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -27,7 +31,7 @@ axios.interceptors.response.use(
   () => NProgress.done()
 );
 
-library.add(faSearch);
+library.add(faSearch, faArrowDown, faArrowUp);
 Vue.component("vue-fontawesome", FontAwesomeIcon);
 
 Vue.use(Vuelidate);

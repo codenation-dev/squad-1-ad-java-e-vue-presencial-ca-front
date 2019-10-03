@@ -61,4 +61,10 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+@import "@/theme.scss";
+
+.navbar-item {
+  color: $white;
+}
+</style>
