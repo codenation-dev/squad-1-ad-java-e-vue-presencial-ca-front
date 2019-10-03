@@ -2,6 +2,7 @@ import Vue from "vue";
 import Buefy from "buefy";
 import axios from "axios";
 import NProgress from "nprogress";
+import Vuelidate from "vuelidate";
 
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -29,6 +30,7 @@ axios.interceptors.response.use(
 library.add(faSearch);
 Vue.component("vue-fontawesome", FontAwesomeIcon);
 
+Vue.use(Vuelidate);
 Vue.use(Buefy, {
   defaultIconComponent: "vue-fontawesome",
   defaultIconPack: "fas"

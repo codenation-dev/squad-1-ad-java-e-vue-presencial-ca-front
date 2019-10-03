@@ -4,6 +4,7 @@
     <div class="control">
       <input
         class="input"
+        :autocomplete="autocomplete"
         :type="type"
         :placeholder="placeholder"
         @change="change"
@@ -17,7 +18,8 @@ export default {
   props: {
     label: String,
     type: String,
-    placeholder: String
+    placeholder: String,
+    autocomplete: String
   },
   model: {
     prop: "value",

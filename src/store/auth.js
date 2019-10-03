@@ -1,11 +1,4 @@
-import { get, postUrlEncoded } from "@/utils/service";
-
-const headers = {
-  "Content-Type": "application/x-www-form-urlencoded",
-  Authorization: `Basic ${btoa(
-    "WHO_IS_MINE_BEAUTY_FRONTEND_APPLICATION:YOU_IS"
-  )}`
-};
+import { get, postUrlEncoded, post } from "@/utils/service";
 
 export default {
   namespaced: true,
@@ -15,13 +8,24 @@ export default {
   },
   actions: {
     async login({ commit }, form) {
+      const headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${btoa(
+          "WHO_IS_MINE_BEAUTY_FRONTEND_APPLICATION:YOU_IS"
+        )}`
+      };
+
       const { data } = await postUrlEncoded(
         "oauth/token",
         { ...form, grant_type: "password" },
         headers
       );
 
-      commit("save_token", data);
+      if (data) {
+        commit("save_token", data);
+      } else {
+        throw new Error("Email ou senha incorretos");
+      }
     },
     async logout({ commit }) {
       await get("oauth/logout");
@@ -34,6 +38,21 @@ export default {
       setTimeout(() => {
         commit("setError", "");
       }, 3000);
+    },
+    // eslint-disable-next-line no-unused-vars
+    async signUp({ commit }, form) {
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${btoa(
+          "WHO_IS_MINE_BEAUTY_FRONTEND_APPLICATION:YOU_IS"
+        )}`
+      };
+
+      const { data } = await post("user", { ...form }, headers);
+
+      if (!data) {
+        throw new Error("Erro na criação do usuário. Tente novamente.");
+      }
     }
   },
   mutations: {
