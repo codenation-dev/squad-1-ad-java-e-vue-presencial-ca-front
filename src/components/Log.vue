@@ -2,13 +2,13 @@
   <RouterLink
     :to="{
       name: 'detail',
-      props: { slug: 'data' },
-      params: { slug: 'data' }
+      props: { slug: data.id },
+      params: { slug: data.id, events: data.occurrences }
     }"
   >
-    <span class="text">{{ data.description }}</span>
+    <span class="text">{{ data.details }}</span>
     <p>{{ data.origin }}</p>
-    <p>{{ data.timestamp }}</p>
+    <p>{{ date }}</p>
   </RouterLink>
 </template>
 
@@ -16,6 +16,11 @@
 export default {
   props: {
     data: Object
+  },
+  computed: {
+    date: function() {
+      return new Date(this.data.createdAt).toLocaleString("pt-BR");
+    }
   }
 };
 </script>
@@ -23,7 +28,7 @@ export default {
 <style>
 .text {
   display: inline-block;
-  width: 200px;
+  width: 500px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
